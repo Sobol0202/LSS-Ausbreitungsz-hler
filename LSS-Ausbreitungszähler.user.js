@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS-Ausbreitungszähler
 // @namespace    https://www.leitstellenspiel.de/
-// @version      1.0
+// @version      1.1
 // @description  Zählt Ausbreitungssprechwünsche und zeigt einen Zähler an
 // @author       MissSobol
 // @match        https://www.leitstellenspiel.de/
@@ -29,22 +29,23 @@
         console.log('Zähler erhöht. Aktueller Wert: ' + localStorage.sprechwunschZaehler);
     }
 
-    // Füge den Zähler zum Hauptmenü hinzu
-    const navbarHeader = document.querySelector('.navbar-header');
-    if (navbarHeader) {
-        const zaehlerElement = document.createElement('span');
-        zaehlerElement.id = 'sprechwunsch-zaehler';
-        zaehlerElement.textContent = localStorage.sprechwunschZaehler;
-        zaehlerElement.style.cursor = 'pointer';
-        zaehlerElement.style.marginLeft = '10px';
-        zaehlerElement.style.position = 'relative';
-        zaehlerElement.style.top = '50%';
-        zaehlerElement.style.transform = 'translateY(-50%)';
-        zaehlerElement.addEventListener('click', zuruecksetzenZaehler);
-        navbarHeader.appendChild(zaehlerElement);
-    } else {
-        console.error('Das Element mit der Klasse "navbar-header" wurde nicht gefunden.');
-    }
+  // Füge den Zähler zum Funktab hinzu
+  const radioButton = document.getElementById("alliance_radio_off");
+  if (radioButton) {
+    const zaehlerElement = document.createElement("span");
+    zaehlerElement.id = "sprechwunsch-zaehler";
+    zaehlerElement.textContent = localStorage.sprechwunschZaehler;
+    zaehlerElement.style.cursor = "pointer";
+    zaehlerElement.style.marginLeft = "10px";
+    zaehlerElement.style.position = "relative";
+    zaehlerElement.style.top = "50%";
+    zaehlerElement.style.transform = "translateY(-50%)";
+    zaehlerElement.addEventListener("click", zuruecksetzenZaehler);
+
+    radioButton.parentNode.insertBefore(zaehlerElement, radioButton.nextSibling);
+  } else {
+    console.error('Das Element mit der ID "alliance_radio_off" wurde nicht gefunden.');
+  }
 
     // Funktion zum Zurücksetzen des Zählers und Aktualisieren der Anzeige
     function zuruecksetzenZaehler() {
